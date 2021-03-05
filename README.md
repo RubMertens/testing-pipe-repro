@@ -1,27 +1,22 @@
 # TestingPipe
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
+running tests in app.component.spec.ts fails with a strange error:
 
-## Development server
+```
+ Failed: NG0302: The pipe 'displayValue' could not be found!. Find more at https://angular.io/errors/NG0302
+        error properties: Object({ code: '302' })
+        Error: NG0302: The pipe 'displayValue' could not be found!. Find more at https://angular.io/errors/NG0302
+            at getPipeDef$1 (node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:25738:1)
+            at ɵɵpipe (node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:25695:1)
+            at UsesPipeComponent_Template (ng:///UsesPipeComponent.js:7:9)
+            at executeTemplate (node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:9544:1)
+            at renderView (node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:9351:1)
+            at renderComponent (node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:10626:1)
+            at renderChildComponents (node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:9216:1)
+            at renderView (node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:9376:1)
+            at ComponentFactory$1.create (node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:25079:1)
+            at ViewContainerRef.createComponent (node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js:23118:1)
+Chrome 88.0.4324.190 (Windows 10): Executed 1 of 1 (1 FAILED) (0.082 secs / 0.074 secs)
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+It can be fixed by importing the generated component, but the test should not know about the underlying pipe?
