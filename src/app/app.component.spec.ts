@@ -1,31 +1,30 @@
-import { TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { DisplayValuePipe } from './display-value.pipe';
+import { UsesPipeComponent } from './uses-pipe/uses-pipe.component';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        DisplayValuePipe,
+        // UsesPipeComponent // this one is required
       ],
+      imports: [CommonModule]
     }).compileComponents();
-  });
+  }));
 
-  it('should create the app', () => {
+  it('should create the app', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+    fixture.componentInstance.title = 'testing';
 
-  it(`should have as title 'testing-pipe'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('testing-pipe');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('testing-pipe app is running!');
-  });
+
+    const app = fixture.componentInstance;
+    console.log(fixture.nativeElement.innerHTML);
+    expect(app).toBeTruthy();
+  }));
 });
